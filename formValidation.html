@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form Validation</title>
+
+  <!-- CSS -->
+  <style>
+    body {
+      /* Makes form place center of the body vertically and horizontally */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      width: 350px;
+      padding: 10px;
+      border: 1px solid black;
+      border-radius: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 2px solid orange;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    input:focus {
+      border: 2px solid royalblue;
+    }
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    button {
+      padding: 15px;
+      color: white;
+      font-weight: 700;
+      border: none;
+      background-color: royalblue;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="form">
+    <h1>Student Registration Form</h1>
+
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name">
+
+    <label for="age">Age</label>
+    <input type="number" name="age" id="age">
+
+    <label for="rollNumber">Roll Number</label>
+    <input type="number" name="rollNumber" id="rollNumber">
+
+    <label for="course">Course</label>
+    <select name="course" id="course">
+      <option value="">---</option>
+      <option value="bcom">Bcom</option>
+      <option value="bba">BBA</option>
+      <option value="bca">BCA</option>
+    </select>
+
+    <br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // Javascript 
+
+    const form = document.getElementById("form");  // form element refference 
+
+    form.addEventListener("submit", function (e) { // submit event
+      e.preventDefault(); // prevent browser default behaviour (auto reload etc..)
+
+      // capture all input fields
+      const name = document.getElementById("name").value;
+      const age = document.getElementById("age").value;
+      const rollNumber = document.getElementById("rollNumber").value;
+      const course = document.getElementById("course").value;
+
+      // validation (check all feilds is empty or not)
+      if (name === "") {
+        alert("Name is required");
+        return;
+      }
+
+
+      if (age === "") {
+        alert("Age is required");
+        return;
+      }
+
+      // check student submitted age is less than 18 years to prevent minors to submit the form
+      if (Number(age) < 18) {
+        alert("The student must be at least 18 years old to register for this form.");
+        return;
+      }
+
+      if (rollNumber === "") {
+        alert("Roll Number is required");
+        return;
+      }
+
+      if (course === "") {
+        alert("Cource is required");
+        return;
+      }
+
+      // final data as array
+      const data = [name, age, rollNumber, course];
+
+      console.log(data);
+
+      alert("Form submitted successfully ");
+
+      // reset form input fields once successfully submitted 
+      form.reset();
+    });
+  </script>
+</body>
+
+</html>
